@@ -1,7 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import MyComponent from '../Components/Library/gptInputButton';
+
 
 const HomeScreen = () => {
+  const [enteredTodo, setEnteredTodo] = useState('')
+
+    function todoInputHandler(enteredText) {
+      setEnteredTodo(enteredText);
+    }
+    function addTodoHandler() {
+      console.log(enteredTodo);
+    }
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
@@ -15,7 +26,6 @@ const HomeScreen = () => {
           <Text style={styles.scrollText}>Nap Rec</Text>
         </View>
       </ScrollView>
-
       <ScrollView horizontal={true}>
         <View style={styles.scrollItem}>
           <Text style={styles.scrollText}>Downstate Rec</Text>
@@ -27,10 +37,10 @@ const HomeScreen = () => {
           <Text style={styles.scrollText}>Downstate Rec</Text>
         </View>
       </ScrollView>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Scheduling</Text>
-      </TouchableOpacity>
+      <TextInput style={styles.inputContainer} onChangeText={todoInputHandler}></TextInput>
+      <TouchableOpacity style={styles.buttonContainer} onPress={addTodoHandler}>
+        <Text style={styles.buttonText}> Submit </Text>
+      </TouchableOpacity> 
     </View>
   );
 };
@@ -56,19 +66,34 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ffffff',
   },
-  button: {
-    backgroundColor: '#cc0000',
-    height: 50,
-    width: '80%',
-    borderRadius: 10,
-    justifyContent: 'center',
+  buttonContainer: {
+    backgroundColor: '#4CAF50',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginBottom: 16,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
   },
   buttonText: {
     color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  inputContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
 });
 
